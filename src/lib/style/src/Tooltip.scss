@@ -1,0 +1,125 @@
+.Tooltip-wrapper {
+  z-index: 9999;
+  position: absolute;
+  &.show {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    transition: all 0.3s ease-in-out;
+  }
+  &.fadeout {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+  }
+  &.hiddle {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .arrow {
+    z-index: 10;
+    position: absolute;
+    width: 0;
+    height: 0;
+    &::after {
+      content: '';
+      position: absolute;
+      border: 5px solid transparent;
+    }
+  }
+  &[data-placement='top'] .arrow {
+    bottom: 0;
+    left: 50%;
+    &::after {
+      transform: translateX(-50%);
+      border-top-color: #e2e2e2;
+      top: 0;
+    }
+  }
+  &[data-placement='bottom'] .arrow {
+    top: -10px;
+    left: 50%;
+    &::after {
+      transform: translateX(-50%);
+      border-bottom-color: #e2e2e2;
+      top: 0;
+    }
+  }
+  &[data-placement='left'] .arrow {
+    right: 0;
+    top: 50%;
+    &::after {
+      transform: translateY(-50%);
+      border-left-color: #e2e2e2;
+      left: 0;
+    }
+  }
+  &[data-placement='right'] .arrow {
+    left: -10px;
+    top: 50%;
+    &::after {
+      transform: translateY(-50%);
+      border-right-color: #e2e2e2;
+      left: 0;
+    }
+  }
+  .content {
+    padding: 0.3rem;
+    border-radius: 0.2rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+    font-size: 9px;
+    color: #333;
+    z-index: 999;
+    max-width: 300px;
+    word-break: normal;
+    white-space: nowrap;
+    &.with-title {
+      padding: 5px 7px;
+    }
+    .title {
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 0.2rem;
+    }
+    .Actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      button {
+        all: unset;
+      }
+      .Confirm {
+        margin-left: 0.2rem;
+        background-color: #4280d6;
+        color: #fff;
+        border: none;
+        padding: 0.2rem 0.3rem;
+        border-radius: 0.2rem;
+        cursor: pointer;
+        &:hover {
+          background-color: #5b8fd8;
+        }
+      }
+      .Cancel {
+        background-color: #919191;
+        color: #fff;
+        border: none;
+        padding: 0.2rem 0.3rem;
+        border-radius: 0.2rem;
+        cursor: pointer;
+        &:hover {
+          background-color: rgb(162, 159, 159);
+        }
+      }
+    }
+  }
+}
+:global(.Tooltip-container) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}

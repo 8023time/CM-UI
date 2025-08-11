@@ -1,0 +1,40 @@
+
+
+$namespace: 'cm' !default;
+$block: '-' !default;
+$element: '__' !default;
+$modifier: '--' !default;
+
+// BEM--------------------
+@mixin block($name) {
+  $blockName: #{$namespace + $block + $name};
+  .#{$blockName} {
+    @content;
+  }
+}
+
+@mixin element($name) {
+  $elementName: &;
+  @at-root {
+    #{$elementName + $element + $name} {
+      @content;
+    }
+  }
+}
+
+@mixin modifier($name) {
+  $modifierName: &;
+  @at-root {
+    #{$modifierName + $modifier + $name} {
+      @content;
+    }
+  }
+}
+
+@mixin when($state) {
+  @at-root {
+    &.#{$state} {
+      @content;
+    }
+  }
+}

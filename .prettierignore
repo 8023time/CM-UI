@@ -1,0 +1,25 @@
+# Package Managers
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lock
+bun.lockb
+
+# Miscellaneous
+.DS_Store
+*.log
+/static/
+dist
+build
+node_modules
+
+# IDEs and Editors
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS generated files
+Thumbs.db

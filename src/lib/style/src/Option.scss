@@ -1,0 +1,37 @@
+.dropdown-container {
+  padding: 4px 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  color: #333;
+  border-radius: 6px;
+  &:hover {
+    background-color: #fafafa;
+  }
+  &.disabled {
+    color: #c0c4cc;
+    cursor: not-allowed;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+  &.active {
+    background-color: #e7e7e7;
+    &:hover {
+      background-color: #e7e7e7;
+    }
+  }
+  &.hiddle {
+    display: none;
+  }
+  .item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+  }
+}
+button {
+  all: unset;
+}

@@ -1,0 +1,134 @@
+button,
+input {
+  all: unset;
+}
+input[placeholder] {
+  color: var(--text-primary);
+}
+.dropdown-container {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  min-width: 80px;
+  width: 100%;
+  .input {
+    padding: 5px 20px 5px 8px;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 10;
+    transition:
+      border-color 0.3s,
+      box-shadow 0.3s;
+    box-sizing: border-box;
+    &:hover {
+      border-color: #409eff;
+    }
+    &:focus {
+      border-color: #409eff;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 2px;
+      overflow: hidden;
+      overflow-x: auto;
+      scrollbar-width: none;
+      .tag-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f0f0f0;
+        padding: 1.5px 5px;
+        border-radius: 4px;
+        font-size: 10px;
+        color: var(--text-primary);
+        button {
+          width: 12px;
+          height: 12px;
+          background-image: url('/clear/delete.svg');
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          border: none;
+          cursor: pointer;
+          &:hover {
+            background-image: url('/clear/delete-active.svg');
+          }
+        }
+        .tag-label {
+          white-space: nowrap;
+        }
+      }
+    }
+    .placeholder {
+      color: var(--text-primary);
+      font-size: 12px;
+    }
+  }
+  .icon {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    z-index: 999;
+    img {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+  }
+  .options {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    max-height: 150px;
+    padding: 0;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #e4e7ed;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+    &.top {
+      bottom: calc(100%);
+    }
+    &.bottom {
+      top: calc(100%);
+    }
+    section {
+      display: flex;
+      flex-direction: column;
+      padding: 6px;
+      gap: 3px;
+    }
+    .no-options {
+      padding: 4px 8px;
+      cursor: pointer;
+      transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+      color: #333;
+      border-radius: 6px;
+      .no-data {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 400;
+      }
+    }
+  }
+}
+.hidle {
+  display: none;
+}
