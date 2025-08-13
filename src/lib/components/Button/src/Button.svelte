@@ -20,8 +20,8 @@
    * <Button type="primary" size="large" round> 提交 </Button>
    * <Button type="danger" size="small" icon="/alert.svg"> 警告 </Button>
    */
-
-  import '../style';
+  import { getType } from '$lib/utils/index.js';
+  import '../style/index';
 
   let { plain = false, type = 'primary', disabled = false, round = false, icon = '', size = 'medium', alt = 'icon', width = '', height = '', onclick = () => {}, children } = $props();
 
@@ -35,11 +35,6 @@
     const BUTTON_TYPES = ['primary', 'success', 'danger', 'warning', 'info'];
     const BUTTON_SIZES = ['small', 'medium', 'large'];
     const VALID_UNITS = ['px', 'em', 'rem', '%', 'vw', 'vh'];
-
-    // 获取精确的数据类型
-    function getType(value) {
-      return Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
-    }
 
     // type 校验
     if (getType(type) !== 'string' || !BUTTON_TYPES.includes(type.trim())) {
@@ -153,8 +148,8 @@
     }
 
     // onclick 校验
-    if (getType(onclick) !== 'function') {
-      console.warn(`[Button] onclick 必须为函数，当前为 ${getType(onclick)}`);
+    if (!['function', 'asyncfunction'].includes(getType(onclick))) {
+      console.warn(`[Button] onclick 必须为function/asyncfunction，当前为 ${getType(onclick)}`);
       onclick = () => {};
     }
   })();

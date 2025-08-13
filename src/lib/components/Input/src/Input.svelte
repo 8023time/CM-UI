@@ -20,7 +20,8 @@
    * @example
    * <InputBox bind:value={valueName} onInput={handleInput} />
    */
-  import '../style';
+  import '../style/index';
+
   let { value = $bindable(), label = '标签文字', type = 'text', placeholder = '请输入信息', request = false, show_label = true, readonly = false, color = '', disabled = false, clearable = true, round = false, onInput = () => {} } = $props();
 
   let inputType = $state(type);
@@ -29,6 +30,7 @@
   /**
    * 处理单个输入框的输入事件
    * @param event
+   * @type {function}
    */
   function handleInputSingle(event) {
     onInput(event.target.value);
@@ -51,48 +53,49 @@
     showPassword = !showPassword;
     inputType = showPassword ? 'text' : 'password';
   }
+
+  /**
+   * class类集合
+   * @type {string}
+   */
+  let classes = $state([round && 'is-round', disabled && 'is-disabled'].filter(Boolean).join(' '));
 </script>
 
-<div class="InputBox-container">
+<div class="input">
   <!-- 标签显示 -->
   {#if show_label}
-    <div class="InputBox-label">
-      <!-- request符号显示 -->
+    <label for="input" class="input__label">
       {#if request}
-        <span class="required">*</span>
+        <span class="input__label--required">*</span>
       {/if}
       {label}
-    </div>
+    </label>
   {/if}
-  <!-- 通过readonly属性控制是否可编辑,切换为只读状态用来展示的样式 -->
+  <!-- 普通只读信息展示框 -->
   {#if readonly}
-    {#if type.toLowerCase() == 'password'}
-      <div class="InforInput-password {round ? 'round' : ''} {disabled ? 'disabled' : ''}">
+    {#if type.toLowerCase() === 'password'}
+      <div class="input__info-password {classes}">
         {#if showPassword}
           {value || '• • • • • • • •'}
         {:else}
           • • • • • • • •
         {/if}
       </div>
-      <button onclick={togglePassword} title={showPassword ? '隐藏密码' : '显示密码'}>
-        <img src="/teacher_mgt/{showPassword ? 'hide.svg' : 'show.svg'}" alt="{showPassword ? '隐藏' : '显示'}密码" />
-      </button>
     {:else}
-      <div class="InforInput-value {round ? 'round' : ''} {disabled ? 'disabled' : ''}" style={color ? `color: ${color};` : ''}>
+      <div class="input__info-value {classes}" style={color ? `color: ${color};` : ''}>
         {value ? value : placeholder}
       </div>
     {/if}
     <!-- 普通通用输入框 -->
   {:else}
-    <div class="InputBox-box">
-      <input class="InputBox-input {round ? 'round' : ''} {disabled ? 'disabled' : ''}" type={inputType} bind:value {placeholder} {disabled} oninput={handleInputSingle} />
+    <div class="input__wrapper">
+      <input bind:value id="input" {disabled} {placeholder} type={inputType} class="input__inner {classes}" oninput={handleInputSingle} />
       <!-- 清除输入按钮 -->
       {#if clearable && value && !disabled}
-        <button class="clear-icon" onclick={clearInput} aria-label="清除输入"></button>
+        <button onclick={clearInput} class="button--clear" title="清除输入" aria-label="清除输入"></button>
       {/if}
-      <button onclick={togglePassword} title={showPassword ? '隐藏密码' : '显示密码'} class="password-icon {type == 'password' ? '' : 'hide'}">
-        <img src="/teacher_mgt/{showPassword ? 'hide.svg' : 'show.svg'}" alt="{showPassword ? '隐藏' : '显示'}密码" />
-      </button>
     </div>
   {/if}
+  <!-- 切换显示密码按钮 -->
+  <button type="button" onclick={togglePassword} data-state={showPassword ? 'show' : 'hide'} title={showPassword ? '隐藏密码' : '显示密码'} aria-label={showPassword ? '隐藏密码' : '显示密码'} class="button__password--toggle {type == 'password' ? '' : 'is-hide'}"> </button>
 </div>

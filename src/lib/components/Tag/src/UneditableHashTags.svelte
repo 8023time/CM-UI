@@ -1,19 +1,44 @@
-<!-- /*
- * @Author: wusaber33 
- * @Date: 2025-04-07 20:05:21 
- * @Last Modified by:   wusaber 
- * @Last Modified time: 2025-04-07 20:05:21 
- * @FilePath: \tutorial-platform-fe\src\lib\UneditableHashTags.svelte
- * @Description: 生成标签颜色映射，使用HSL颜色模型
- * @Copyright: Copyright (c) 2025 by wusaber33, All Rights Reserved. 
- -->
 <script>
+  import { getType } from '$lib/utils/index.js';
   const DEFAULT_TAGS = ['frontend', 'backend', 'svelte', '前端', 'JavaScript', 'CSS', 'HTML', 'Node.js'];
 
   let { tags = DEFAULT_TAGS } = $props();
 
-  // 字符串哈希函数
   /**
+   * 校验规则
+   * @type {Object}
+   */
+  const propsRules = {
+    tags: { type: ['array'], default: DEFAULT_TAGS, check: (v) => v.length > 0, message: 'tags 不能为空' },
+  };
+
+  /**
+   * 校验props属性是否合法，以及进行容错处理
+   * @param data
+   * @param key
+   */
+  function validateAndAssign(data, key) {
+    const rule = propsRules[key];
+    const value = data.value;
+    let reason = '';
+    if (!rule.type.includes(getType(value))) {
+      reason = `类型错误,期望类型为${rule.type.join('、')},实际类型为${getType(value)}`;
+    } else if (rule.check && !rule.check(value)) {
+      reason = rule.message ? rule.message : `不符合校验规则`;
+    }
+    if (reason) {
+      console.warn(`[UneditableHashTags] 属性 '${key}' 无效: ${reason}, 已使用默认值 '${rule.default}', 传入值为: '${value}'`);
+      data.set(rule.default);
+    }
+  }
+
+  /**
+   * 校验props属性是否合法，以及进行容错处理
+   */
+  validateAndAssign({ value: tags, set: (v) => (tags = v) }, 'tags');
+
+  /**
+   * 字符串哈希函数
    * @param {string} str
    * @returns {number}
    */
@@ -26,8 +51,8 @@
     return Math.abs(hash);
   }
 
-  // 根据标签名称获取颜色,使用HSL颜色模型
   /**
+   * 根据标签名称获取颜色,使用HSL颜色模型
    * * @param {string} tagName
    */
   function getTagColor(tagName) {
@@ -45,16 +70,12 @@
   });
 </script>
 
-{#snippet courseTag(/** @type {string} */ tag, /** @type {number} */ i)}
-  <div class="tag">
-    <span class="tag-square" style="background-color: {tagColorMap.get(tag)};"></span>
-    <span class="tag-text">{tag}</span>
-  </div>
-{/snippet}
-
 <div class="tags">
-  {#each tags as tag, i}
-    {@render courseTag(tag, i)}
+  {#each tags as tag, i (i)}
+    <div class="tag">
+      <span class="tag-square" style="background-color: {tagColorMap.get(tag)};"></span>
+      <span class="tag-text">{tag}</span>
+    </div>
   {/each}
 </div>
 
@@ -70,26 +91,26 @@
     align-items: flex-start;
     overflow-y: auto;
     max-height: $max-container-height;
-  }
 
-  .tag {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-  }
+    .tag {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
 
-  .tag-text {
-    padding: 0 0 0 1px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: $max-tag-width;
-    color: #797979;
-  }
+      &-text {
+        padding: 0 0 0 1px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: $max-tag-width;
+        color: #797979;
+      }
 
-  .tag-square {
-    width: 15px;
-    height: 15px;
-    border-radius: 3px;
+      &-square {
+        width: 15px;
+        height: 15px;
+        border-radius: 3px;
+      }
+    }
   }
 </style>

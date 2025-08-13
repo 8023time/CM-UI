@@ -1,148 +1,148 @@
- $small: 12px;
-  $medium: 14px;
-  $large: 16px;
+$small: 12px;
+$medium: 14px;
+$large: 16px;
 
-  /** 默认按钮类型（填充型按钮）*/
-  @mixin button-type($color) {
+/** 默认按钮类型（填充型按钮）*/
+@mixin button-type($color) {
+  color: var(--text-white);
+  background-color: $color;
+  border: 1px solid $color;
+  filter: opacity(0.8) contrast(0.9);
+  &:hover {
+    filter: opacity(1) contrast(1);
+  }
+}
+
+/** 朴素按钮类型（透明背景，hover 填充） */
+@mixin plain-button-type($color) {
+  color: $color;
+  border-color: $color;
+  background-color: transparent;
+  &:hover {
     color: var(--text-white);
     background-color: $color;
-    border: 1px solid $color;
-    filter: opacity(0.8) contrast(0.9);
-    &:hover {
-      filter: opacity(1) contrast(1);
-    }
+  }
+}
+
+/** size 按钮尺寸 */
+@mixin button-size($size) {
+  font-size: $size;
+  @if $size == $small {
+    padding: 6px 10px;
+  } @else if $size == $medium {
+    padding: 8px 15px;
+  } @else if $size == $large {
+    padding: 10px 20px;
+  } @else {
+    padding: 8px 15px;
+  }
+  .button__icon {
+    width: 1em;
+    height: 1em;
+  }
+}
+
+/** 按钮主样式  */
+.button {
+  cursor: pointer;
+  appearance: none;
+  display: inline-block;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  align-self: center;
+  border-radius: var(--btn-border-radius);
+  white-space: nowrap;
+  &:active {
+    transform: scale(0.95);
   }
 
-  /** 朴素按钮类型（透明背景，hover 填充） */
-  @mixin plain-button-type($color) {
-    color: $color;
-    border-color: $color;
-    background-color: transparent;
-    &:hover {
-      color: var(--text-white);
-      background-color: $color;
-    }
-  }
-
-  /** size 按钮尺寸 */
-  @mixin button-size($size) {
-    font-size: $size;
-    @if $size == $small {
-      padding: 6px 10px;
-    } @else if $size == $medium {
-      padding: 8px 15px;
-    } @else if $size == $large {
-      padding: 10px 20px;
-    } @else {
-      padding: 8px 15px;
-    }
-    .button__icon {
-      width: 1em;
-      height: 1em;
-    }
-  }
-
-  /** 按钮主样式  */
-  .button {
-    cursor: pointer;
-    appearance: none;
+  /** 图标区域 @element .icon*/
+  .button__icon {
+    margin-right: 0.5em;
+    object-fit: cover;
     display: inline-block;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-    align-self: center;
-    border-radius: var(--btn-border-radius);
+    vertical-align: middle;
+  }
+
+  /** 文本区域 @element .text*/
+  .button__text {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /** 禁用状态 @modifier .disabled */
+  &.is-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
     &:active {
-      transform: scale(0.95);
-    }
-
-    /** 图标区域 @element .icon*/
-    .button__icon {
-      margin-right: 0.5em;
-      object-fit: cover;
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    /** 文本区域 @element .text*/
-    .button__text {
-      display: inline-block;
-      vertical-align: middle;
-      max-width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /** 禁用状态 @modifier .disabled */
-    &.is-disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      &:active {
-        transform: scale(1);
-      }
-    }
-
-    /** 圆角按钮 */
-    &.is-round {
-      border-radius: 9999px;
-    }
-
-    // === (size) 按钮尺寸 ===
-    &.button--small {
-      @include button-size($small);
-    }
-    &.button--medium {
-      @include button-size($medium);
-    }
-    &.button--large {
-      @include button-size($large);
-    }
-
-    // === (type) 按钮类型 ===
-    &.button--primary {
-      @include button-type(var(--blue));
-    }
-    &.button--success {
-      @include button-type(var(--green));
-    }
-    &.button--danger {
-      @include button-type(var(--red));
-    }
-    &.button--warning {
-      @include button-type(var(--orange));
-    }
-    &.button--info {
-      @include button-type(var(--gray));
-    }
-
-    // === 按钮（plain）样式组合 ===
-    &.is-plain.button--primary {
-      @include plain-button-type(var(--blue));
-    }
-    &.is-plain.button--success {
-      @include plain-button-type(var(--green));
-    }
-    &.is-plain.button--danger {
-      @include plain-button-type(var(--red));
-    }
-    &.is-plain.button--warning {
-      @include plain-button-type(var(--orange));
-    }
-    &.is-plain.button--info {
-      @include plain-button-type(var(--gray));
+      transform: scale(1);
     }
   }
 
-  :global(.button) + .button {
+  /** 圆角按钮 */
+  &.is-round {
+    border-radius: 9999px;
+  }
+
+  // === (size) 按钮尺寸 ===
+  &.button--small {
+    @include button-size($small);
+  }
+  &.button--medium {
+    @include button-size($medium);
+  }
+  &.button--large {
+    @include button-size($large);
+  }
+
+  // === (type) 按钮类型 ===
+  &.button--primary {
+    @include button-type(var(--blue));
+  }
+  &.button--success {
+    @include button-type(var(--green));
+  }
+  &.button--danger {
+    @include button-type(var(--red));
+  }
+  &.button--warning {
+    @include button-type(var(--orange));
+  }
+  &.button--info {
+    @include button-type(var(--gray));
+  }
+
+  // === 按钮（plain）样式组合 ===
+  &.is-plain.button--primary {
+    @include plain-button-type(var(--blue));
+  }
+  &.is-plain.button--success {
+    @include plain-button-type(var(--green));
+  }
+  &.is-plain.button--danger {
+    @include plain-button-type(var(--red));
+  }
+  &.is-plain.button--warning {
+    @include plain-button-type(var(--orange));
+  }
+  &.is-plain.button--info {
+    @include plain-button-type(var(--gray));
+  }
+}
+
+:global(.button) + .button {
+  margin-left: 0.5em;
+  @media screen and (max-width: 480px) {
+    margin-left: 0.3em;
+  }
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    margin-left: 0.4em;
+  }
+  @media screen and (min-width: 769px) {
     margin-left: 0.5em;
-    @media screen and (max-width: 480px) {
-      margin-left: 0.3em;
-    }
-    @media screen and (min-width: 481px) and (max-width: 768px) {
-      margin-left: 0.4em;
-    }
-    @media screen and (min-width: 769px) {
-      margin-left: 0.5em;
-    }
   }
+}

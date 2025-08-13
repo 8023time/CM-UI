@@ -1,15 +1,9 @@
-<!--/**
- * @Author: wusaber33
- * @Date: 2025-04-23 20:22:44
- * @LastEditors: wusaber33
- * @LastEditTime: 2025-04-26 22:05:58
- * @FilePath: \tutorial-platform-fe\src\routes\teacher\paperManagement\UneditableTag.svelte
- * @Description: 
- * @Copyright (c) 2025 by wusaber33, All Rights Reserved. 
- */ -->
 <script>
+  import { getType } from '$lib/utils/index.js';
+  /**
+   * 颜色列表
+   */
   const COLOR_LIST = [
-    // 保留原颜色列表不变
     '#40d5ff',
     '#59dcff',
     '#33c1e8',
@@ -39,15 +33,46 @@
     '#e6ffcc',
   ];
 
-  export let content = '';
-  export let colors = COLOR_LIST;
+  let { content, colors = COLOR_LIST } = $props();
+
+  /**
+   * 属性校验规则
+   * @type {Object}
+   */
+  const propsRules = {
+    content: { type: ['string'], default: '标签文本' },
+    colors: { type: ['array'], default: COLOR_LIST, check: (v) => v.length > 0, message: 'colors 不能为空' },
+  };
+
+  /**
+   * 校验props属性是否合法，以及进行容错处理
+   * @param data
+   * @param key
+   */
+  function validateAndAssign(data, key) {
+    const rule = propsRules[key];
+    const value = data.value;
+    let reason = '';
+    if (!rule.type.includes(getType(value))) {
+      reason = `类型错误,期望类型为${rule.type.join('、')},实际类型为${getType(value)}`;
+    } else if (rule.check && !rule.check(value)) {
+      reason = rule.message ? rule.message : `不符合校验规则`;
+    }
+    if (reason) {
+      console.warn(`[UneditableTag] 属性 '${key}' 无效: ${reason}, 已使用默认值 '${rule.default}', 传入值为: '${value}'`);
+      data.set(rule.default);
+    }
+  }
+
+  /**
+   * 校验props属性是否合法，以及进行容错处理
+   */
+  validateAndAssign({ value: content, set: (v) => (content = v) }, 'content');
+  validateAndAssign({ value: colors, set: (v) => (colors = v) }, 'colors');
 </script>
 
 <div class="tag-container">
-  <!-- 颜色块保持不变 -->
   <div class="tag-color" style="background-color: {COLOR_LIST[content.charAt(0).charCodeAt(0) % colors.length]}"></div>
-
-  <!-- 文本内容改为纯展示 -->
   <div class="tag-content">
     <span class="tag-text">{content}</span>
   </div>

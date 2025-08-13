@@ -1,5 +1,5 @@
 import Tooltip from './Tooltip.svelte';
-import { mount } from 'svelte';
+import { mount, unmount } from 'svelte';
 
 let container;
 
@@ -31,47 +31,28 @@ function ensureContainer() {
  *
  * @example use指令
  * <button use:tooltip={{ content: '提示内容', placement: 'top' }}>点击</button>
- * <button
- *   use:tooltip={{
- *     content: '这是提示信息',
- *     placement: 'bottom',
- *     hide_method: 'hover',
- *     show_actions: true,
- *     show_title: true,
- *     title: '提示标题',
- *     Confirm: () => console.log('确认'),
- *     Cancel: () => console.log('取消'),
- *   }}>
- *   悬停我看看
- * </button>
  */
 export function tooltip(node, options) {
   if (!options?.content) return;
-
-  let instance;
-  const mountTooltip = () => {
-    ensureContainer();
-    instance = mount(Tooltip, {
-      target: container,
-      props: {
-        target: node,
-        ...options,
-      },
-    });
-  };
-  mountTooltip();
-
-  return {
-    update(newOptions) {
-      if (instance?.$set && newOptions) {
-        instance.$set({ ...newOptions, target: node });
-      }
+  ensureContainer();
+  const TooltipInstance = mount(Tooltip, {
+    target: container,
+    props: {
+      target: node,
+      ...options,
     },
-    destroy() {
-      if (instance?.$destroy) {
-        instance.$destroy();
-        instance = null;
-      }
-    },
+  });
+
+  // 监听 node 是否从 DOM 移除
+  const observer = new MutationObserver(() => {
+    if (!document.body.contains(node)) {
+      unmount(TooltipInstance);
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  return () => {
+    observer.disconnect();
   };
 }

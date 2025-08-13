@@ -1,8 +1,12 @@
 import Toast from './Toast.svelte';
 import { mount } from 'svelte';
 
-let toastContainer;
+let toastContainer; 
 
+/**
+ * 如果没有父级容器,创建一个父级容器管理子容器toast信息提示，同时挂载到body
+ * @type {function}
+ */
 function ensureContainer() {
   if (!toastContainer) {
     toastContainer = document.createElement('div');
@@ -11,6 +15,7 @@ function ensureContainer() {
   }
 }
 
+// 挂载toast.svelte组件的函数式
 function showToast(message, type = 'success', duration = 3000, showClose = true) {
   ensureContainer();
   const container = document.createElement('div');
@@ -26,11 +31,12 @@ function showToast(message, type = 'success', duration = 3000, showClose = true)
   });
   setTimeout(() => {
     container.remove();
+    // 如果toastContainer没有子元素了，移除
+    if (toastContainer && toastContainer.childElementCount === 0) {
+      toastContainer.remove();
+      toastContainer = null;
+    }
   }, duration + 500);
-  if (toastContainer && toastContainer.childElementCount === 0) {
-    toastContainer = null;
-    toastContainer.remove();
-  }
 }
 
 /**

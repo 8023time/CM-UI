@@ -1,7 +1,11 @@
-button {
-  all: unset;
+@mixin when($name) {
+  @at-root {
+    &.#{'is-' + $name} {
+      @content;
+    }
+  }
 }
-.toast-box {
+.toast {
   min-width: 200px;
   max-width: 400px;
   position: relative;
@@ -13,20 +17,25 @@ button {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   animation: fadeIn 0.5s ease;
   background-color: #ffffff;
-  &.fade-out {
+  @include when(fadeOut) {
     animation: fadeOut 0.5s ease forwards;
   }
-  .icon {
+  &__icon {
     width: 20px;
     height: 20px;
   }
-  .close {
+  &__close {
+    all: unset;
     cursor: pointer;
     width: 12px;
     height: 12px;
     margin-left: auto;
+    background-image: url('/theory_question_bank/icons/Xacross.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
   }
-  .message {
+  &__message {
     font-size: 14px;
     font-weight: 500;
     color: #333;
@@ -53,7 +62,8 @@ button {
     transform: translateY(-10px);
   }
 }
-.toast-container {
+// 全局容器，用来统一管理多个toast信息提示
+:global(.toast-container) {
   position: fixed;
   top: 80px;
   left: 50%;
@@ -64,6 +74,6 @@ button {
   z-index: 9999;
   pointer-events: none;
 }
-.toast-container > div {
+:global(.toast-container > div) {
   pointer-events: all;
 }
