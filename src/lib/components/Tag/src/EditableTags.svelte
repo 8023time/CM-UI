@@ -1,24 +1,3 @@
-<!-- 
- /*
- * @Author: Mayux dbs45412@163.com
- * @Date: 2025-04-04 19:25:22
- * @LastEditors: myx dbs45412@163.com
- * @LastEditTime: 2025-04-08 17:30:52
- * @FilePath: \tutorial-platform-fe\src\lib\EditableTags.svelte
- * @Description: 可编辑的标签组件，用于对标签进行添加/删减
- * @Exported Methods: 
- *   - getTags(): 返回当前的标签数组。
- * @Props: 
- *   - original_tags (Array<string>): 初始标签数组，默认值为 ["默认标签"]。
- *   - max_tags_num (number): 最大允许的标签数量，默认值为 6。
- *   - max_tags_text_num (number): 每个标签的最大字符数，默认值为 20。
- *   - input_type (string): 输入框的类型，默认值为 "text"。
- *   - colors (Array<string>): 标签颜色数组，默认值为 DEFAULT_COLORS。
- *   - onInputChange (function): 在标签输入时被调用的函数，该函数需要接收一个string类型的数组（标签数组）作为参数
- *   - 其余关于样式的参数参见CSS部分
- * @Copyright: Copyright (c) 2025 by Mayux, All Rights Reserved. 
- */ 
- -->
 <script>
   const DEFAULT_TAGS = ['默认标签'];
 

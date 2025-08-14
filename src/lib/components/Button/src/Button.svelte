@@ -1,25 +1,4 @@
 <script>
-  /**
-   * @component Button
-   * @description 通用按钮组件，支持图标、不同样式、尺寸、圆角、禁用、自定义宽高、插槽等
-   *
-   * @props
-   * @property {boolean} [plain=false] - 是否为朴素按钮，hover 时填充背景
-   * @property {'small' | 'medium' | 'large'} [size='medium'] - 按钮尺寸
-   * @property {'primary' | 'success' | 'danger' | 'warning' | 'info'} [type='primary'] - 按钮类型
-   * @property {boolean} [disabled=false] - 是否禁用按钮
-   * @property {boolean} [round=false] - 是否圆角按钮
-   * @property {string} [icon=''] - 图标地址（URL 或本地路径）
-   * @property {string} [alt=''] - 图标的替代文字
-   * @property {string} [width=''] - 按钮宽度,填写数字默认为px，推荐填写 px、em、rem、%、vw、vh
-   * @property {string} [height=''] - 按钮高度
-   * @property {function} [onclick=()=>{}] - 点击事件
-   * @property {any} children - 默认插槽内容
-   *
-   * @example
-   * <Button type="primary" size="large" round> 提交 </Button>
-   * <Button type="danger" size="small" icon="/alert.svg"> 警告 </Button>
-   */
   import { getType } from '$lib/utils/index.js';
   import '../style/index';
 

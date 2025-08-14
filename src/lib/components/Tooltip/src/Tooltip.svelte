@@ -1,23 +1,4 @@
 <script>
-  /**
-   * @component Tooltip
-   * @description 气泡提示组件
-   *
-   * @props
-   * @property {Element} [target='']   - 触发气泡提示的元素，必填
-   * @property {'top' | 'left' | 'right' | 'bottom'} [placement='bottom']   - 气泡框位置
-   * @property {String} [content='']   - 气泡提示的内容
-   * @property {String} [color='#ffffff']   - 组件背景颜色
-   * @property {'click' | 'hover'} [hide_method='hover']   - 隐藏方式
-   * @property {Boolean} [show_actions=false]   - 使用对话框
-   * @property {Boolean} [show_title=false]   - 使用标题
-   * @property {Boolean} [show_cancel=true]   - 显示取消按钮
-   * @property {Boolean} [title='']   - 标题内容
-   * @property {Function} onConfirm   - 确认按钮回调函数
-   * @property {Function} onCancel   - 取消按钮回调函数
-   * @property {String} [confirm_text='确认']  - 确认按钮文本
-   * @property {String} [cancel_text='取消']  - 取消按钮文本
-   */
   import { tick, onMount } from 'svelte';
   import { getType } from '$lib/utils/index.js';
   import '../style/index';

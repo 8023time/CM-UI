@@ -1,26 +1,4 @@
 <script>
-  /**
-   * @component MessageBox
-   * @description 弹出窗提示组件
-   *
-   * @props
-   * @property {Object} options 配置项
-   * @property {string} [options.content=""] 弹窗内容
-   * @property {string} [options.title="温馨提示"] 弹窗标题
-   * @property {boolean} [options.visible=false] 是否显示弹窗
-   * @property {boolean} [options.center=false] 是否居中显示内容
-   * @property {string} [options.cancel_text="取消"] 取消按钮文本
-   * @property {string} [options.confirm_text="确定"] 确认按钮文本
-   * @property {boolean} [options.show_cancel_button=true] 是否显示取消按钮
-   * @property {boolean} [options.show_confirm_button=true] 是否显示确认按钮
-   * @property {boolean} [options.show_cancel_icon=true] 是否显示右上角取消图标
-   * @property {boolean} [options.on_close_by_click_outside=true] 点击空白区域是否关闭弹窗
-   * @property {'primary' | 'success' | 'danger' | 'warning' | 'info'} [options.type="primary"] 弹窗类型
-   * @property {'primary' | 'success' | 'danger' | 'warning' | 'info'} [options.cancel_button_type="info"] 取消按钮类型
-   * @property {'primary' | 'success' | 'danger' | 'warning' | 'info'} [options.confirm_button_type="primary"] 确认按钮类型
-   * @property {Function} [options.onCancel] 点击取消的回调函数
-   * @property {Function} [options.onConfirm] 点击确认的回调函数
-   */
   import '$lib/components/Button/index.scss';
   import { getType } from '$lib/utils/index.js';
   import '../style/index';

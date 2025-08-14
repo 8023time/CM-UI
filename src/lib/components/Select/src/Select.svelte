@@ -1,29 +1,4 @@
 <script>
-  /**
-   * @component Select + (Option)
-   * @description 选择输入搜索框组件
-   *
-   * @props
-   * @property {string|string[]} value - 当前选中的值（单选为 string，多选为 string[]）。
-   * @property {string} [placeholder="请选择"] - 输入框占位符。
-   * @property {'top' | 'bottom'} [direction="bottom"] - 选择器弹出方向.
-   * @property {boolean} [disabled=false] - 是否禁用选择器。
-   * @property {boolean} [multiple=false] - 是否启用多选模式。
-   * @property {boolean} [filterable=false] - 是否允许输入搜索。
-   * @property {functino} [changeValue] - 选中值变化的回调函数。
-   *
-   * @slot - <Option> 子组件
-   *
-   * @example
-   * <Select value="1" placeholder="请选择" multiple filterable >
-   *   <Option value="1" label="选项1"></Option>
-   *   <Option value="2" label="选项2"></Option>
-   *   <Option value="3" label="选项3"></Option>
-   * </Select>
-   *
-   * @tips
-   *  选项的value值不能重复，否则会导致选项显示异常
-   */
   import { setContext, getContext } from 'svelte';
   import { writable } from 'svelte/store';
   import '../style/Select';

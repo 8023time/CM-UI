@@ -1,11 +1,6 @@
+@use './config.scss'
 
-
-$namespace: 'cm' !default;
-$block: '-' !default;
-$element: '__' !default;
-$modifier: '--' !default;
-
-// BEM--------------------
+//----------bem----------
 @mixin block($name) {
   $blockName: #{$namespace + $block + $name};
   .#{$blockName} {
@@ -38,3 +33,4 @@ $modifier: '--' !default;
     }
   }
 }
+//----------bem----------

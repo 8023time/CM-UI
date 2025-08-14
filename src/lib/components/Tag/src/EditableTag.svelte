@@ -1,23 +1,3 @@
-<!--
- * @Author: Zpekii 3156752796@qq.com
- * @Date: 2025-04-07 15:25:05
- * @LastEditors: Zpekii 3156752796@qq.com
- * @LastEditTime: 2025-04-08 21:57:22
- * @FilePath: \exam-fe\src\lib\component\EditableTag.svelte
- * @Description: 可编辑tag
- * @Copyright (c) 2025 by Zpekii, All Rights Reserved. 
--->
-
-<!--                         o8o                 .   
-                             `"'               .o8   
- .oooo.o  .ooooo.  oooo d8b oooo  oo.ooooo.  .o888oo 
-d88(  "8 d88' `"Y8 `888""8P `888   888' `88b   888   
-`"Y88b.  888        888      888   888   888   888   
-o.  )88b 888   .o8  888      888   888   888   888 . 
-8""888P' `Y8bod8P' d888b    o888o  888bod8P'   "888" 
-                                   888               
-                                  o888o              
-                                                      -->
 <script>
   /**
    * @type {Array<string>} 颜色列表
@@ -95,18 +75,6 @@ o.  )88b 888   .o8  888      888   888   888   888 .
   let old_content = $state(content);
 </script>
 
-<!-- 
-    .                                          oooo                .             
-  .o8                                          `888              .o8             
-.o888oo  .ooooo.  ooo. .oo.  .oo.   oo.ooooo.   888   .oooo.   .o888oo  .ooooo.  
-  888   d88' `88b `888P"Y88bP"Y88b   888' `88b  888  `P  )88b    888   d88' `88b 
-  888   888ooo888  888   888   888   888   888  888   .oP"888    888   888ooo888 
-  888 . 888    .o  888   888   888   888   888  888  d8(  888    888 . 888    .o 
-  "888" `Y8bod8P' o888o o888o o888o  888bod8P' o888o `Y888""8o   "888" `Y8bod8P' 
-                                     888                                         
-                                    o888o                                        
-                                                                                 
--->
 <div class="tag-container">
   <div class="tag-color" style="background-color: {COLOR_LIST[content.charAt(0).charCodeAt(0) % colors.length]}"></div>
 
@@ -169,18 +137,7 @@ o.  )88b 888   .o8  888      888   888   888   888 .
   </div>
 </div>
 
-<!-- 
-             .               oooo            
-           .o8               `888            
- .oooo.o .o888oo oooo    ooo  888   .ooooo.  
-d88(  "8   888    `88.  .8'   888  d88' `88b 
-`"Y88b.    888     `88..8'    888  888ooo888 
-o.  )88b   888 .    `888'     888  888    .o 
-8""888P'   "888"     .8'     o888o `Y8bod8P' 
-                 .o..P'                      
-                 `Y8P'                       
-                                             
--->
+
 <style lang="scss" scoped>
   .tag-container {
     display: flex;

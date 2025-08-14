@@ -1,16 +1,4 @@
 <script>
-  /**
-   * @component Empty
-   * @description 无数据提示组件
-   *
-   * @props
-   * @property {String} [text='暂无数据'] - 无数据提示文本
-   * @property {Boolean} [show_icon=true] - 是否显示无数据图标
-   * @property {Boolean} [show_text=true] - 是否显示无数据文本
-   *
-   * @example
-   * <Empty text="暂无数据"/>
-   */
   import { getType } from '$lib/utils/index.js';
 
   let { text = '暂无数据', show_icon = true, show_text = true } = $props();

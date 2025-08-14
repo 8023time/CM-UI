@@ -1,15 +1,4 @@
 <script>
-  /**
-   * @component Title
-   * @description 页面标题
-   *
-   * @props
-   * @property {String} [title='Title'] - 标题文本
-   * @property {Boolean} [line=true] - 是否显示横向分割线
-   *
-   * @example
-   * <Title title="基本信息" line />
-   */
   import { getType } from '$lib/utils/index.js';
 
   let { title = 'Title', line = true } = $props();

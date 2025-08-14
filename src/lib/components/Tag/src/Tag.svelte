@@ -1,12 +1,4 @@
 <script>
-  /**
-   * @description 标签组件
-   * type: 标签类型，可选值 primary, success, danger, warning, info
-   * size: 标签尺寸，可选值 small, middle, large
-   * them ： 标签主题，可选值 light, dark, plain
-   * plain: 是否为朴素标签
-   * round: 是否为圆角标签
-   */
   let { type = 'primary', size = 'middle', them = 'dark', round = false, children } = $props();
 
   let themsClass = {

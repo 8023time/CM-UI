@@ -1,13 +1,4 @@
 <script>
-  /**
-   * @component (Select) + Option
-   * @description 选择输入搜索框组件
-   *
-   * @props
-   * @property {string} [value=""] - 选择器的值
-   * @property {string} [label=''] - 选择器的标签
-   * @property {boolean} [disabled=false] - 选择器是否禁用
-   */
   import { getContext, setContext } from 'svelte';
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';

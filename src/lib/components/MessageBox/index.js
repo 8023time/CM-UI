@@ -1,3 +1,3 @@
-import { default as MessageBox } from './src/MessageBox.js';
+import {  MessageBox } from './src/MessageBox.js';
 
 export { MessageBox };
